@@ -12,7 +12,6 @@
     
     <table class="table">
         <tr>
-            <th>id</th>
             <th>Titulo</th>
             <th>Descricao</th>
             <th>ReceitaTexto</th>
@@ -27,32 +26,31 @@
                 $termoPesquisado = "";
             }
     
-            $sql = "SELECT ID,
-            upper(Titulo) AS Titulo,
-            upper(Descricao) AS Descricao,
-            upper(ReceitaTexto) AS Texto,
-            upper(Autor) AS Autor,
-            upper(TipoReceita) AS Receita,
-            FROM receitas WHERE 
-            ID = '$termoPesquisado' OR
+            $sql = "SELECT  IdReceita ,
+            UPPER(Titulo) AS Titulo,
+            UPPER(Descricao) AS Descricao,
+            UPPER(ReceitaTexto) AS ReceitaTexto,
+            UPPER(Autor) AS Autor,
+            UPPER(TipoReceita) AS TipoReceita
+            FROM receita
+            WHERE 
+            IdReceita = '$termoPesquisado' OR
             Titulo LIKE '%$termoPesquisado%'
-            ORDER BY Titulo ASC
-            ";
-            // pedido
+            ORDER BY Titulo ASC";
+        
+
             $query = mysqli_query($conexao,$sql) or die("Erro na requisição!".mysqli_error($conexao));
-    
-            // fetch_asso = vai acessar um query, e contar os resultado
-    
+
             while($dados = mysqli_fetch_assoc($query)){
                 ?>
                     <tr>
-                        <td><?=$dados['Titulo']?></td>
-                        <td><?=$dados['Descricao']?></td>
-                        <td><?=$dados['ReceitaTexto']?></td>
-                        <td><?=$dados['Autor']?></td>
-                        <td><?=$dados['TipoReceitas']?></td>
-                        <td><a href="index.php?menu=Editar&ID=<?=$dados['ID']?>" class="btn btn-primary">EDITAR</a></td>
-                        <td><a href="index.php?menu=Deletar&ID=<?=$dados['ID']?>" class="btn btn-danger">DELETAR</a></td>
+                    <td><?=$dados['Titulo']?></td>
+                    <td><?=$dados['Descricao']?></td>
+                    <td><?=$dados['ReceitaTexto']?></td>
+                    <td><?=$dados['Autor']?></td>
+                    <td><?=$dados['TipoReceita']?></td>
+                    <td><a href="index.php?menu=editar&IdReceita=<?=$dados['IdReceita']?>" class="btn btn-primary" id="editar">EDITAR</a></td>
+                    <td><a href="index.php?menu=deletar&IdReceita=<?=$dados['IdReceita']?>" class="btn btn-danger" id="deletar">DELETAR</a></td>
                     </tr>
                 <?php
             }

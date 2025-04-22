@@ -1,39 +1,39 @@
 <?php
-    $modelo = mysqli_real_escape_string($conexao,$_POST[
+    $titulo = mysqli_real_escape_string($conexao,$_POST[
         'Titulo'
     ]);
 
-    $marca = mysqli_real_escape_string($conexao,$_POST[
+    $descricao = mysqli_real_escape_string($conexao,$_POST[
         'Descricao'
     ]);
 
-    $valor = mysqli_real_escape_string($conexao,$_POST[
-        'Receita'
+    $receitaTexto = mysqli_real_escape_string($conexao,$_POST[
+        'ReceitaTexto'
     ]);
 
-    $ano = mysqli_real_escape_string($conexao,$_POST[
+    $autor = mysqli_real_escape_string($conexao,$_POST[
         'Autor'
     ]);
 
-    $cor = mysqli_real_escape_string($conexao,$_POST[
-        'Receita'
+    $tipoReceita = mysqli_real_escape_string($conexao,$_POST[
+        'TipoReceita'
     ]);
 
-    $sql = "INSERT into carros (
-        modeloCarro,
-        marcaCarro,
-        valorCarro,
-        anoCarro,
-        corCarro
+    $sql = "INSERT into receita (
+        Titulo,
+        Descricao,
+        ReceitaTexto,
+        Autor,
+        TipoReceita
             ) values (
-            '{$modelo}',
-            '{$marca}',
-            '{$valor}',
-            '{$ano}',
-            '{$cor}'
+            '{$titulo}',
+            '{$descricao}',
+            '{$receitaTexto}',
+            '{$autor}',
+            '{$tipoReceita}'
         )";
 
         mysqli_query($conexao,$sql) or die("erro ao add carro".mysqli_error(($conexao)));
-        echo "O carro {$modelo} foi adicionado com sucesso!"
+        echo "A Receita {$titulo} foi adicionada com sucesso!"
 ?>
 
